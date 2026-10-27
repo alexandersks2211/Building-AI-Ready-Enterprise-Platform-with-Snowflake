@@ -1,0 +1,39 @@
+-- Scenario 1: Using OpenAI GPT-5 from an AWS-hosted account
+
+USE ROLE ACCOUNTADMIN;
+
+-- Check the current account parameter setting
+SHOW PARAMETERS LIKE 'CORTEX_ENABLED_CROSS_REGION' IN ACCOUNT;
+
+-- Allow inference in any region, on any cloud
+ALTER ACCOUNT SET CORTEX_ENABLED_CROSS_REGION = 'ANY_REGION';
+
+-- Scenario 2: Using Claude Opus 4.7 from an AWS-hosted account
+
+USE ROLE ACCOUNTADMIN;
+
+-- Check the current account parameter setting
+SHOW PARAMETERS LIKE 'CORTEX_ENABLED_CROSS_REGION' IN ACCOUNT;
+
+-- Allow inference in any AWS region, but never on another cloud
+ALTER ACCOUNT SET CORTEX_ENABLED_CROSS_REGION = 'AWS_GLOBAL';
+
+-- Scenario 3: Keeping inference within Australia
+
+USE ROLE ACCOUNTADMIN;
+
+-- Check the current account parameter setting
+SHOW PARAMETERS LIKE 'CORTEX_ENABLED_CROSS_REGION' IN ACCOUNT;
+
+-- Allow inference only in AWS regions within Australia
+ALTER ACCOUNT SET CORTEX_ENABLED_CROSS_REGION = 'AWS_AU';
+
+-- Scenario 4: Keeping inference in the home region
+
+USE ROLE ACCOUNTADMIN;
+
+-- Check the current account parameter setting
+SHOW PARAMETERS LIKE 'CORTEX_ENABLED_CROSS_REGION' IN ACCOUNT;
+
+-- Process inference only in the account's home region
+ALTER ACCOUNT SET CORTEX_ENABLED_CROSS_REGION = 'DISABLED';
